@@ -1,0 +1,17 @@
+#login::after{
+    content: "";
+    background: url(IMG_0631.jpg) no-repeat center center fixed;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+}
+
+.card{
+    margin-top: 25%;
+    border-radius: 25px;
+}
+
