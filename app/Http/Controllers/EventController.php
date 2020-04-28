@@ -30,46 +30,12 @@ class EventController extends Controller
         $EventModel->FillWithData($data);
 
 
-        var_dump($EventModel);
+        return view("event", ["event" => $EventModel]);
     }
 
-    private function dummyEvents(){
-        $dummyData = [
-            [
-                "id" => 1,
-                "active" => true,
-                "name" => "event 1",
-                "description" => "this is a description",
-                "poster" => "https://product-image.juniqe-production.juniqe.com/media/catalog/product/cache/x800/740/9/740-9-101P.jpg",
-                "genre_id" => 1,
-            ],
-            [
-                "id" => 2,
-                "active" => true,
-                "name" => "event 2",
-                "description" => "this is a description",
-                "poster" => "https://product-image.juniqe-production.juniqe.com/media/catalog/product/cache/x800/740/9/740-9-101P.jpg",
-                "genre_id" => 2,
-            ],
-            [
-                "id" => 3,
-                "active" => true,
-                "name" => "event 3",
-                "description" => "this is a description",
-                "poster" => "https://product-image.juniqe-production.juniqe.com/media/catalog/product/cache/x800/740/9/740-9-101P.jpg",
-                "genre_id" => 3,
-            ],
-            [
-                "id" => 4,
-                "active" => true,
-                "name" => "event 4",
-                "description" => "this is a description",
-                "poster" => "https://product-image.juniqe-production.juniqe.com/media/catalog/product/cache/x800/740/9/740-9-101P.jpg",
-                "genre_id" => 4,
-            ],
-        ];
-
-        $test = new EventModel();
-        return $test->FillWithDataArray($dummyData);
+    public function EventDate($id)
+    {
+        echo "EventDate id = " . $id;
     }
+
 }

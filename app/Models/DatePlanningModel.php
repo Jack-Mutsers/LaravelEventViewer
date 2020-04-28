@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 class DatePlanningModel
 {
@@ -8,6 +8,7 @@ class DatePlanningModel
     public $event_id;
     public $start;
     public $end;
+    public $event_date;
 
     public function FillWithData($data = false)
     {
@@ -16,7 +17,15 @@ class DatePlanningModel
         }
 
         foreach($data as $key => $val){
-            $this->$key = $val;
+            if(key_exists($key, $this)){
+                if($key == "event_date" && $val != null){
+                    $eventDateModel = new EventDateModel();
+                    $this->$key = $eventDateModel->FillWithData($val);
+                }
+                else{
+                    $this->$key = $val;
+                }   
+            } 
         }
 
         return $this;
@@ -30,7 +39,9 @@ class DatePlanningModel
 
         $array = [];
         foreach($data as $key => $val){
-           array_push(FillWithData($val), $array);
+            $self = new self();
+            $instance = $self->FillWithData($val);
+            array_push($array, $instance);
         }
 
         return $array;

@@ -13,6 +13,8 @@ class EventModel
     public $poster;
     public $genre_id;
     public $genre = [];
+    public $next;
+    public $finished = [];
 
     public function FillWithData($data = false)
     {
@@ -22,13 +24,21 @@ class EventModel
 
         foreach($data as $key => $val){
             if(key_exists($key, $this)){
-                if($key == "genre"){
-                    foreach($val as $genrelink){
-                        array_push($this->$key, $genrelink->genre->name);
-                    }
-                }else{
-                    $this->$key = $val;
+                if($key == "genre" && $val != null){
+                    $genreModel = new GenreModel();
+                    $this->$key = $genreModel->FillWithDataArray($val);
                 }
+                else if($key == "next" && $val != null){
+                    $datePlanningModel = new DatePlanningModel();
+                    $this->$key = $datePlanningModel->FillWithData($val);
+                }
+                else if($key == "finished" && $val != null){
+                    $datePlanningModel = new DatePlanningModel();
+                    $this->$key = $datePlanningModel->FillWithDataArray($val);
+                }
+                else{
+                    $this->$key = $val;
+                }    
             }
         }
 

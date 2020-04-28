@@ -1,12 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 class StageModel
 {
     public $id;
     public $event_date_id;
     public $name;
+    public $schedule;
 
     public function FillWithData($data = false)
     {
@@ -15,7 +16,15 @@ class StageModel
         }
 
         foreach($data as $key => $val){
-            $this->$key = $val;
+            if(key_exists($key, $this)){
+                if($key == "schedule" && $val != null){
+                    $scheduleModel = new ScheduleModel();
+                    $this->$key = $scheduleModel->FillWithDataArray($val);
+                }
+                else{
+                    $this->$key = $val;
+                }  
+            }      
         }
 
         return $this;
@@ -29,7 +38,9 @@ class StageModel
 
         $array = [];
         foreach($data as $key => $val){
-           array_push(FillWithData($val), $array);
+            $self = new self();
+            $instance = $self->FillWithData($val);
+            array_push($array, $instance);
         }
 
         return $array;

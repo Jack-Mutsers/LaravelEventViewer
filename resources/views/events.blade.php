@@ -15,7 +15,7 @@
                         <h3>{{$val->name}}</h3>
                         <p>
                             @foreach($val->genre as $genre)    
-                                <div class="genre-tag">{{$genre}}</div>
+                                <div class="genre-tag">{{$genre->name}}</div>
                             @endforeach
                         </p>
                     </div>

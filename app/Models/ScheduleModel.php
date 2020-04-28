@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 class ScheduleModel
 {
@@ -8,6 +8,7 @@ class ScheduleModel
     public $stage_id;
     public $event_id;
     public $datetime;
+    public $schedule_items = [];
 
     public function FillWithData($data = false)
     {
@@ -16,7 +17,15 @@ class ScheduleModel
         }
 
         foreach($data as $key => $val){
-            $this->$key = $val;
+            if(key_exists($key, $this)){
+                if($key == "schedule_items" && $val != null){
+                    $scheduleItemModel = new ScheduleItemModel();
+                    $this->$key = $scheduleItemModel->FillWithDataArray($val);
+                }
+                else{
+                    $this->$key = $val;
+                }
+            }
         }
 
         return $this;
@@ -30,7 +39,9 @@ class ScheduleModel
 
         $array = [];
         foreach($data as $key => $val){
-           array_push(FillWithData($val), $array);
+            $self = new self();
+            $instance = $self->FillWithData($val);
+            array_push($array, $instance);
         }
 
         return $array;

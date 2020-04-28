@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 class ScheduleItemModel
 {
@@ -8,6 +8,7 @@ class ScheduleItemModel
     public $schedule_id;
     public $artist_id;
     public $stage_time;
+    public $artists;
 
     public function FillWithData($data = false)
     {
@@ -16,7 +17,12 @@ class ScheduleItemModel
         }
 
         foreach($data as $key => $val){
-            $this->$key = $val;
+            if($key == "artists" && $val != null){
+                $artistModel = new ArtistModel();
+                $this->$key = $artistModel->FillWithDataArray($val);
+            }else{
+                $this->$key = $val;
+            }
         }
 
         return $this;
@@ -30,7 +36,9 @@ class ScheduleItemModel
 
         $array = [];
         foreach($data as $key => $val){
-           array_push(FillWithData($val), $array);
+            $self = new self();
+            $instance = $self->FillWithData($val);
+            array_push($array, $instance);
         }
 
         return $array;

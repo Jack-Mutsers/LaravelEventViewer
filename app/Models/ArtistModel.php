@@ -1,12 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 class ArtistModel
 {
     public $id;
     public $name;
     public $genre_id;
+    public $genre;
 
     public function FillWithData($data = false)
     {
@@ -15,7 +16,15 @@ class ArtistModel
         }
 
         foreach($data as $key => $val){
-            $this->$key = $val;
+            if(key_exists($key, $this)){
+                if($key == "genre" && $val != null){
+                    $genreModel = new GenreModel();
+                    $this->$key = $genreModel->FillWithData($val);
+                }
+                else{
+                    $this->$key = $val;
+                }
+            }
         }
 
         return $this;
@@ -29,7 +38,9 @@ class ArtistModel
 
         $array = [];
         foreach($data as $key => $val){
-           array_push(FillWithData($val), $array);
+            $self = new self();
+            $instance = $self->FillWithData($val);
+            array_push($array, $instance);
         }
 
         return $array;
