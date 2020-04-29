@@ -8,6 +8,7 @@ class ReviewModel
     public $event_date_id;
     public $user_id;
     public $review;
+    public $rating;
     public $validated;
 
     public function FillWithData($data = false)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\EventModel;
+use App\Models\EventDateModel;
 use App\ApiConnector\EventApiHandler;
 
 class EventController extends Controller
@@ -29,13 +30,22 @@ class EventController extends Controller
         $EventModel = new EventModel();
         $EventModel->FillWithData($data);
 
+        //dd($EventModel);
 
         return view("event", ["event" => $EventModel]);
     }
 
     public function EventDate($id)
     {
-        echo "EventDate id = " . $id;
+        $eventApiHandler = new EventApiHandler();
+
+        $data = $eventApiHandler->GetEventDate($id);
+
+        $eventDateModel = new EventDateModel();
+        $eventDateModel->FillWithData($data);
+
+        //dd($eventDateModel);
+        return view("eventDate", ["eventdate" => $eventDateModel]);
     }
 
 }

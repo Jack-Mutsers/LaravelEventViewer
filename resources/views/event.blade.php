@@ -4,7 +4,7 @@
 <link href="{{ asset('css/event.css') }}" rel="stylesheet">
 <div class="content-container">
 
-    <div class="row">
+    <div class="row" id="content-title">
         <div class="col-md-12">
             <!-- event title -->
             <h2>{{$event->name}}</h2>
@@ -33,7 +33,7 @@
                     <!-- date upcomming event -->
                     <span class="boldTitle">Event Date:</span> <br/>
                     @if($event->next != null)
-                        <span class="box-item">{{$event->next->start}}</span>
+                        <span class="box-item">{{$event->next->start->format('d F Y')}}</span>
                     @else
                         <span class="box-item">There is no event planned yet</span>
                     @endif
@@ -86,6 +86,54 @@
         <!-- link naar bestel site -->
     </div>
 
+
+    @if($event->next != null && count($event->next->event_date->stages) > 0)
+        <div class="row">
+            <div class="col-md-12">
+                <h2>planning</h2>
+            </div>
+        </div>
+
+        <div class="row" id="content-schedule">
+            <!-- foldable stages + schedule -->
+            <ul class="nav nav-pills">
+                <?php $stageCount = 0; ?>
+                @foreach($event->next->event_date->stages as $stage)
+                    <?php $stageCount++; ?>
+                    <li><a class="{{$stageCount == 1? 'active':''}} nav_link" data-toggle="tab" href="#stage{{$stageCount}}"><span class="boldTitle">{{$stage->name}}</span></a></li>
+                @endforeach
+            </ul>
+
+            <div class="col-md-12 box tab-content">
+                <?php $stageCount = 0; ?>
+                @foreach($event->next->event_date->stages as $stage)
+                    <?php $stageCount++; ?>
+                    <div id="stage{{$stageCount}}" class="tab-pane fade {{$stageCount == 1? 'in active show':''}}">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Start</th>
+                                    <th>Duration</th>
+                                    <th>Artist</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($stage->schedule[0]->scheduleItems as $schedule_item)
+                                    <tr>
+                                        <td>{{$schedule_item->start->format("H:i:s")}}</td>
+                                        <td>{{$schedule_item->stage_time}}</td>
+                                        <td>{{$schedule_item->artist->name}}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
+
+
     @if(count($event->finished) > 0)
         <div class="row">
             <div class="col-md-12">
@@ -102,7 +150,7 @@
                             <img src="{{ $oldEvent->event_date->poster }}" alt="">
                         </div>
                         <div class="card-footer">
-                            <p>{{$oldEvent->start}}</p>
+                            <p>{{$oldEvent->start->format('F Y')}}</p>
                         </div>
                     </a>
                 </div>

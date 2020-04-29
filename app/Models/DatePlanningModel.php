@@ -22,6 +22,12 @@ class DatePlanningModel
                     $eventDateModel = new EventDateModel();
                     $this->$key = $eventDateModel->FillWithData($val);
                 }
+                else if($key == "start" && $val != null){
+                    $this->$key  = new \DateTime($val);
+                }
+                else if($key == "end" && $val != null){
+                    $this->$key  = new \DateTime($val);
+                }
                 else{
                     $this->$key = $val;
                 }   

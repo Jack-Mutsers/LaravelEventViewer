@@ -8,7 +8,7 @@ class ScheduleModel
     public $stage_id;
     public $event_id;
     public $datetime;
-    public $schedule_items = [];
+    public $scheduleItems = [];
 
     public function FillWithData($data = false)
     {
@@ -18,7 +18,7 @@ class ScheduleModel
 
         foreach($data as $key => $val){
             if(key_exists($key, $this)){
-                if($key == "schedule_items" && $val != null){
+                if($key == "scheduleItems" && $val != null){
                     $scheduleItemModel = new ScheduleItemModel();
                     $this->$key = $scheduleItemModel->FillWithDataArray($val);
                 }

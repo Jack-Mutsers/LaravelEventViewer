@@ -3,7 +3,7 @@
 @section('content')
 <link href="{{ asset('css/events.css') }}" rel="stylesheet">
 
-<div class="container">
+<div class="content-container">
     <div class="row">
         @foreach($events as $key => $val)
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">

@@ -11,8 +11,10 @@ class EventDateModel
     public $poster;
     public $images;
     public $videos;
+    public $event;
+    public $datePlanning;
     public $stages = [];
-    public $Reviews = [];
+    public $reviews = [];
     public $artists = [];
 
     public function FillWithData($data = false)
@@ -26,6 +28,14 @@ class EventDateModel
                 if($key == "stages" && $val != null){
                     $stageModel = new StageModel();
                     $this->$key = $stageModel->FillWithDataArray($val);
+                }
+                else if($key == "event" && $val != null){
+                    $eventModel = new EventModel();
+                    $this->$key = $eventModel->FillWithData($val);
+                }
+                else if($key == "datePlanning" && $val != null){
+                    $datePlanningModel = new DatePlanningModel();
+                    $this->$key = $datePlanningModel->FillWithData($val);
                 }
                 else if($key == "reviews" && $val != null){
                     $reviewModel = new ReviewModel();
