@@ -11,15 +11,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script type="text/javascript" src="{{ asset('/js/jquery.js') }}" ></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <!-- test -->
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/who/addTest.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -46,47 +42,10 @@
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Gebruikersbeheer <span class="caret"></span>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                                events <span class="caret"></span>
                                 </a>
-                
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="register">
-                                    {{ __('Gebruiker aanmaken') }}
-                                </a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                      Toetsbeheer <span class="caret"></span>
-                                    </a>
-                    
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                      <a class="dropdown-item" href="test-overview">
-                                        {{ __('Toets overzicht') }}
-                                      </a>
-                                      <a class="dropdown-item" href="TestRegister">
-                                          {{ __('Toets aanmaken') }}
-                                      </a>
-                                    </div>
-                                </li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
                             </li>
                         @endguest
                     </ul>

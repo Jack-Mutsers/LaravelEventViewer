@@ -27,4 +27,6 @@ Route::get('Login', 'LoginController@Login');
 Route::get('Register', 'LoginController@Register');
 Route::post('NewRegister', 'LoginController@AddUser');
 
-Route::get('admin/Login', 'Admin/LoginController@Login');
+Route::get('admin', 'Admin\LoginController@index');
+Route::get('admin/Login', 'Admin\LoginController@index');
+Route::post('admin/CheckLogin', 'Admin\LoginController@CheckLogin');

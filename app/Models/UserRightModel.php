@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-class UserModel
+class UserRightModel
 {
     public $id;
-    public $name;
-    public $username;
-    public $password;
-    public $right_id;
-    public $right;
+    public $title;
+    public $admin;
 
     public function FillWithData($data = false)
     {
@@ -18,12 +15,7 @@ class UserModel
         }
 
         foreach($data as $key => $val){
-            if($key == "right" && $val != null){
-                $userRightModel = new UserRightModel();
-                $this->$key = $userRightModel->FillWithData($val);
-            }else{
-                $this->$key = $val;
-            }
+            $this->$key = $val;
         }
 
         return $this;
