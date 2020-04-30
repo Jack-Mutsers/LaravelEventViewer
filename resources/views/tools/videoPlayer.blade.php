@@ -1,3 +1,4 @@
+@if(!empty($videos) > 0)
 
 <link href="{{ asset('css/videoPlayer.css') }}" rel="stylesheet">
 
@@ -19,3 +20,10 @@
     </div>
 @endforeach
 
+@else
+
+<div class="col-md-12">
+    No videos have been uploaded yet.
+</div>
+
+@endif

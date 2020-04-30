@@ -1,0 +1,15 @@
+#calendar {
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+}
+
+.fc-toolbar{
+  color: white;
+  background: rgb(143, 93, 36);
+  margin-bottom: 0 !important;
+}
+
+.fc-day.fc-widget-content.fc-today{
+  background: yellowgreen;
+}

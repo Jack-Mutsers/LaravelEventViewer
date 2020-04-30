@@ -1,0 +1,25 @@
+.content-container{
+    padding:  0 1.5em 1.5em 1.5em;
+    max-width: 960px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#content-header{
+    margin-bottom: 45px;
+}
+
+#content-header #poster-container img{
+    max-width: 100%;
+    display: block;
+}
+
+.header-link{
+    text-decoration: none;
+    color: inherit;
+}
+
+.header-link:hover{
+    text-decoration: none;
+    color: inherit;
+}

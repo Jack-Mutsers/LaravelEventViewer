@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <div class="row" id="content-fotos">
+    <div class="row" id="content-photos">
         <?php $images = json_decode($eventdate->images); ?>
 
         @include('tools.photoSlider')
@@ -82,32 +82,41 @@
     
     <div class="row" id="content-reviews">
         <hr class="col-md-12" />
-        @foreach($eventdate->reviews as $review)
-            <div class="col-md-12 review">
-                <div class="row review-header">
-                    <div class="col-md-12">
-                        <span class="boldTitle">{{$review->user->name}}:</span> 
-                        
-                        @for( $x = 0; $x < $review->rating; $x += 2 )
-                        
-                            @if( floor( $review->rating )-$x >= 2 )
-                                <i class="fas fa-star rating-star"></i>
-                            @elseif( $review->rating-$x > 0 )
-                                <i class="fas fa-star-half-alt rating-star"></i>
-                            @else
-                                <i class="far fa-star rating-star"></i>
-                            @endif
-                        @endfor
+        @if(!empty($eventdate->reviews))
+            @foreach($eventdate->reviews as $review)
+                <div class="col-md-12 review">
+                    <div class="row review-header">
+                        <div class="col-md-12">
+                            <span class="boldTitle">{{$review->user->name}}:</span> 
+                            
+                            @for( $x = 0; $x < $review->rating; $x += 2 )
+                            
+                                @if( floor( $review->rating )-$x >= 2 )
+                                    <i class="fas fa-star rating-star"></i>
+                                @elseif( $review->rating-$x > 0 )
+                                    <i class="fas fa-star-half-alt rating-star"></i>
+                                @else
+                                    <i class="far fa-star rating-star"></i>
+                                @endif
+                            @endfor
+                        </div>
+                    </div>
+                    <div class="row review-body">
+                        <div class="col-md-12">
+                            <p>{{$review->review}}</p>
+                        </div>
                     </div>
                 </div>
-                <div class="row review-body">
-                    <div class="col-md-12">
-                        <p>{{$review->review}}</p>
-                    </div>
-                </div>
+                <hr class="col-md-12" />
+            @endforeach
+            
+        @else
+
+            <div class="col-md-12">
+                There are no Reviews submitted yet.
             </div>
-            <hr class="col-md-12" />
-        @endforeach
+
+        @endif
     </div>
 </div>
 @endsection

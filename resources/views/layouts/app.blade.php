@@ -40,10 +40,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li><a class="active menubtn" href="/">Home</a></li>
-                        <li><a class="menubtn" href="/Events">Events</a></li>
-                        <li><a class="menubtn" href="/Artists">Artists</a></li>
-                        <li class="dropdown">
+                        <li><a class="{{ (request()->is('/')) ? 'active' : '' }} menubtn" href="/">Home</a></li>
+                        <li><a class="{{ (request()->segment(1) == 'Events') || (request()->segment(1) == 'Event') ? 'active' : '' }} menubtn" href="/Events">Events</a></li>
+                        <li><a class="{{ (request()->segment(1) == 'Artists') ? 'active' : '' }} menubtn" href="/Artists">Artists</a></li>
+                        <li class="{{ (request()->is('Login')) || (request()->is('Register')) ? 'active' : '' }} dropdown">
                             <a href="/Login" class="menubtn">Login</a>
                             <div class="dropdown-content">
                                 <a href="/Register">Register</a>

@@ -1,3 +1,4 @@
+@if(!empty($images) > 0)
 
 <link href="{{ asset('css/photoSlider.css') }}" rel="stylesheet">
 
@@ -21,3 +22,11 @@
         </div>
     </div>
 </div>
+
+@else
+
+<div class="col-md-12">
+    No photos have been uploaded yet.
+</div>
+
+@endif

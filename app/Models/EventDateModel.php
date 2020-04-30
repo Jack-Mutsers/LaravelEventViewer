@@ -11,6 +11,7 @@ class EventDateModel
     public $poster;
     public $images;
     public $videos;
+    public $order_link;
     public $event;
     public $datePlanning;
     public $stages = [];

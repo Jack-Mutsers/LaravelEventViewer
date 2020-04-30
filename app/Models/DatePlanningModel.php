@@ -5,10 +5,11 @@ namespace App\Models;
 class DatePlanningModel
 {
     public $id;
-    public $event_id;
+    public $eventid;
     public $start;
     public $end;
     public $event_date;
+    public $event;
 
     public function FillWithData($data = false)
     {
@@ -27,6 +28,10 @@ class DatePlanningModel
                 }
                 else if($key == "end" && $val != null){
                     $this->$key  = new \DateTime($val);
+                }
+                else if($key == "event" && $val != null){
+                    $eventModel = new EventModel();
+                    $this->$key  = $eventModel->FillWithData($val);
                 }
                 else{
                     $this->$key = $val;

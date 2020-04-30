@@ -1,5 +1,8 @@
-.container{
-    
+.content-container{
+    padding:  0 1.5em 1.5em 1.5em;
+    max-width: 960px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .card{
@@ -14,7 +17,6 @@
 }
 
 .card .card-header{
-    height: 332px;
 }
 
 .card .card-header img{

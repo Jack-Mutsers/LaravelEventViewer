@@ -108,7 +108,7 @@
  .masonry-item {
    display: inline-block;
    vertical-align: top;
-   margin-bottom: 10px;
+   padding-bottom: 10px;
  }
  @media only screen and (max-width: 1023px) and (min-width: 768px) {  .masonry {
      columns: 2;
