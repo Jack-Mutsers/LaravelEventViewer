@@ -23,10 +23,15 @@ Route::get('Event/EventDate/{id}', 'EventController@EventDate');
 Route::get('Artists', 'ArtistController@index');
 Route::get('Artist/{id}', 'ArtistController@Artist');
 
-Route::get('Login', 'LoginController@Login');
-Route::get('Register', 'LoginController@Register');
+Route::get('Login', 'LoginController@index');
+Route::get('Register', 'LoginController@Registration');
 Route::post('NewRegister', 'LoginController@AddUser');
+Route::post('CheckLogin', 'LoginController@CheckLogin');
+Route::get('logout', 'LoginController@Logout');
 
-Route::get('admin', 'Admin\LoginController@index');
-Route::get('admin/Login', 'Admin\LoginController@index');
-Route::post('admin/CheckLogin', 'Admin\LoginController@CheckLogin');
+
+Route::get('admin', function(){
+    return redirect("/admin/events");
+});
+
+Route::get('admin/events', 'Admin\EventController@index');

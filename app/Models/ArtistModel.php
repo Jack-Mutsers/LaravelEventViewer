@@ -6,7 +6,6 @@ class ArtistModel
 {
     public $id;
     public $name;
-    public $genre_id;
     public $genre;
 
     public function FillWithData($data = false)

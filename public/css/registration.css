@@ -1,0 +1,23 @@
+.content-container{
+    padding:  0 1.5em 1.5em 1.5em;
+    max-width: 960px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#preference-container{
+    border: 1px solid gray;
+    background: white;
+    padding: 10px;
+    width: 110px;
+}
+
+#preference-container .preferenceSelector{
+    text-align: center;
+    padding: 3px;
+    margin: 2px;
+}
+
+#preference-container .preferenceSelector.selected{
+    background: yellowgreen;
+}

@@ -31,7 +31,7 @@ class GenreModel
         $array = [];
         foreach($data as $key => $val){
             $self = new self();
-            $instance = $self->FillWithData($val->genre);
+            $instance = $self->FillWithData($val);
             array_push($array, $instance);
         }
 

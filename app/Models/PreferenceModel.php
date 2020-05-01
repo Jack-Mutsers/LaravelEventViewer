@@ -4,9 +4,8 @@ namespace App\Models;
 
 class PreferenceModel
 {
-    public $id;
-    public $user_id;
     public $genre_id;
+    public $genre;
 
     public function FillWithData($data = false)
     {
@@ -15,7 +14,13 @@ class PreferenceModel
         }
 
         foreach($data as $key => $val){
-            $this->$key = $val;
+            if($key == "genre" && $val != null){
+                $genreModel = new GenreModel();
+                $this->$key = $genreModel->FillWithData($val);
+            }
+            else{
+                $this->$key = $val;
+            }    
         }
 
         return $this;

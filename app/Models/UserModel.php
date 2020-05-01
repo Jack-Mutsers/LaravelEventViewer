@@ -4,12 +4,12 @@ namespace App\Models;
 
 class UserModel
 {
-    public $id;
     public $name;
     public $username;
     public $password;
     public $right_id;
     public $right;
+    public $preference;
 
     public function FillWithData($data = false)
     {
@@ -21,6 +21,9 @@ class UserModel
             if($key == "right" && $val != null){
                 $userRightModel = new UserRightModel();
                 $this->$key = $userRightModel->FillWithData($val);
+            }else if($key == "preference" && $val != null){
+                $preferenceModel = new PreferenceModel();
+                $this->$key = $preferenceModel->FillWithDataArray($val);
             }else{
                 $this->$key = $val;
             }

@@ -43,18 +43,22 @@
                         <li><a class="{{ (request()->is('/')) ? 'active' : '' }} menubtn" href="/">Home</a></li>
                         <li><a class="{{ (request()->segment(1) == 'Events') || (request()->segment(1) == 'Event') ? 'active' : '' }} menubtn" href="/Events">Events</a></li>
                         <li><a class="{{ (request()->segment(1) == 'Artists') ? 'active' : '' }} menubtn" href="/Artists">Artists</a></li>
-                        <li class="{{ (request()->is('Login')) || (request()->is('Register')) ? 'active' : '' }} dropdown">
-                            <a href="/Login" class="menubtn">Login</a>
-                            <div class="dropdown-content">
-                                <a href="/Register">Register</a>
-                            </div>
-                        </li>
                     </ul>
-
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-
+                        @if(empty(session('user')))
+                            <li class="{{ (request()->is('Login')) || (request()->is('Register')) ? 'active' : '' }} dropdown">
+                                <a href="/Login" class="menubtn">Login</a>
+                                <div class="dropdown-content">
+                                    <a href="/Register">Register</a>
+                                </div>
+                            </li>
+                        @else
+                            <li>
+                                <a href="/logout" class="menubtn">Logout</a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>

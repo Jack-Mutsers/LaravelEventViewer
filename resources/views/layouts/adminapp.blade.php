@@ -1,4 +1,17 @@
 <!DOCTYPE html>
+
+<?php 
+    if(empty(session('user'))){
+        header("Location: /Login");
+        die();
+    };
+    
+    if(session('user')->right->admin == false){
+        header("Location: /");
+        die();
+    };
+?>
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -10,12 +23,16 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/admin/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-    <!-- test -->
+    
+    <!-- Styles -->
+    <link href="{{ asset('css/admin/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 </head>
 <body>
     <div id="app">
@@ -31,23 +48,20 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <span class="caret">events</span>
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
-                                events <span class="caret"></span>
-                                </a>
-                            </li>
-                        @endguest
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <span class="caret">Logout</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
