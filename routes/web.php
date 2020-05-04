@@ -19,6 +19,7 @@ Route::get('Home', 'HomeController@index');
 Route::get('Events', 'EventController@index');
 Route::get('Event/{id}', 'EventController@Event');
 Route::get('Event/EventDate/{id}', 'EventController@EventDate');
+Route::post('/Event/EventDate/AddReview', 'EventController@AddReview');
 
 Route::get('Artists', 'ArtistController@index');
 Route::get('Artist/{id}', 'ArtistController@Artist');

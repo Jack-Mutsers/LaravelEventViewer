@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index(){
         $eventHandler = new EventApiHandler();
-        $plannigData = $eventHandler->GetDatePlanning();
+        $plannigData = $eventHandler->GetAllDatePlannings();
         $nextEventData = $eventHandler->GetNextEvent();
 
         $datePlanningModel = new DatePlanningModel();

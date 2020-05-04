@@ -53,12 +53,12 @@ class EventApiHandler
         
     }
 
-    public function GetEventDate($id)
+    public function GetDatePlanning($id)
     {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://localhost:5000/api/eventdate/" . $id,
+        CURLOPT_URL => "http://localhost:5000/api/dateplanning/GetById/" . $id,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -76,7 +76,7 @@ class EventApiHandler
         
     }
     
-    public function GetDatePlanning()
+    public function GetAllDatePlannings()
     { 
         $curl = curl_init();
 

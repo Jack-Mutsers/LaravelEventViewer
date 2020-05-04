@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\EventModel;
-use App\Models\EventDateModel;
+use App\Models\DatePlanningModel;
+use App\Models\ReviewModel;
 use App\ApiConnector\EventApiHandler;
+use App\ApiConnector\ReviewApiHandler;
 
 class EventController extends Controller
 {
@@ -39,13 +41,28 @@ class EventController extends Controller
     {
         $eventApiHandler = new EventApiHandler();
 
-        $data = $eventApiHandler->GetEventDate($id);
+        $data = $eventApiHandler->GetDatePlanning($id);
 
-        $eventDateModel = new EventDateModel();
-        $eventDateModel->FillWithData($data);
+        $datePlanningModel = new DatePlanningModel();
+        $datePlanningModel->FillWithData($data);
 
         //dd($eventDateModel);
-        return view("eventDate", ["eventdate" => $eventDateModel]);
+        return view("eventDate", ["datePlanning" => $datePlanningModel]);
+    }
+
+    public function AddReview(Request $request)
+    {
+        $reviewModel = new ReviewModel();
+        $reviewModel->event_date_id = (int) $request->event_date_id;
+        $reviewModel->user_id = (int) session("user")->id;
+        $reviewModel->review = $request->review;
+        $reviewModel->rating = (int) $request->rating;
+
+        $reviewHandler = new ReviewApiHandler();
+        $result = $reviewHandler->AddNew($reviewModel);
+
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        die();
     }
 
 }

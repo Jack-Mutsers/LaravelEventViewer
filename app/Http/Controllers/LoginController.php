@@ -31,7 +31,7 @@ class LoginController extends Controller
             return redirect('/Login');//"login attempt failed";
         }
 
-        $this->HandleLogin($data);
+        return $this->HandleLogin($data);
     }
 
     public function Logout()
@@ -65,7 +65,7 @@ class LoginController extends Controller
         $loginHandler = new LoginApiHandler();
         $result = $loginHandler->Registration($userModel);
 
-        $this->HandleLogin($result);
+        return $this->HandleLogin($result);
         //dd($result);
     }
 
@@ -81,7 +81,7 @@ class LoginController extends Controller
         } else if(!empty($userModel) && $userModel->right->admin == false){
             return redirect("/");
         }
-            
+        
         return redirect('/login');//"login attempt failed";
     }
 }

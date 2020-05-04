@@ -4,6 +4,7 @@ namespace App\Models;
 
 class UserModel
 {
+    public $id;
     public $name;
     public $username;
     public $password;
