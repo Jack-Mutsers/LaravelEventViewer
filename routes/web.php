@@ -36,3 +36,4 @@ Route::get('admin', function(){
 });
 
 Route::get('admin/events', 'Admin\EventController@index');
+Route::post('admin/event/datatable_ajax', 'Admin\EventController@datatable_ajax');
