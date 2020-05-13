@@ -133,7 +133,7 @@ class EventController extends Controller
 		}else{
 
 			$object = (object) array(
-				'url' => "upload/" . $oldName,
+				'url' => "images/" . $oldName,
 				'name' => $oldName,
 				'image' => true
 			);
@@ -155,10 +155,10 @@ class EventController extends Controller
 			if($request->hasFile('posterImage')){
 				if( $request->file('posterImage')->isValid()){
 					if($this->ValidateImage($img)){
-						$file_path = base_path() . "/upload";
+						$file_path = base_path() . "/public/images/";
 						if($img->move($file_path, $image_name)){
 							$image_object = (object) array(
-								'url' => "upload/" . $image_name,
+								'url' => "images/" . $image_name,
 								'name' => $image_name,
 								'image' => true
 							);
