@@ -15,9 +15,13 @@
         <div class="col-md-4" id="poster-container">
             <!-- poster -->
             @if($event->next != null)
-                <img src="{{$event->next->event_date->poster}}" alt="">
+                <?php $poster = json_decode($event->next->event_date->poster) ?>
+                <?php $value = is_object($poster) ? asset($poster->url) : $poster; ?>
+                <img src="{{ $value }}" alt="">
             @else
-                <img src="{{$event->poster}}" alt="">
+                <?php $poster = json_decode($event->poster) ?>
+                <?php $value = is_object($poster) ? asset($poster->url): $poster; ?>
+                <img src="{{ $value }}" alt="">
             @endif
         </div>
         
@@ -57,8 +61,8 @@
                 <!-- event genres -->
                 <span class="boldTitle">Genres:</span>
                 <ul>
-                    @foreach($event->genre as $genre)
-                        <li>{{$genre->name}}</li>
+                    @foreach($event->genre as $eventGenre)
+                        <li>{{$eventGenre->genre->name}}</li>
                     @endforeach
                 </ul>
             </div>
@@ -147,7 +151,9 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <a href="EventDate/{{ $oldEvent->id }}" class="card">
                         <div class="card-header">
-                            <img src="{{ $oldEvent->event_date->poster }}" alt="">
+                            <?php $poster = json_decode($oldEvent->event_date->poster) ?>
+                            <?php $value = is_object($poster) ? asset($poster->url): $poster; ?>
+                            <img src="{{ $value }}" alt="">
                         </div>
                         <div class="card-footer">
                             <p>{{$oldEvent->start->format('F Y')}}</p>

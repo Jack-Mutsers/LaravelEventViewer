@@ -4,18 +4,8 @@
 
 
     <div class="container">
-        <h1>Events</h1>
+        <h1>{{$event_name}}</h1>
         
-        <hr>
-
-        <div class="row">
-            <div class="col-md-12">
-                <a href="/admin/event"><button class="btn btn-primary" type="button">Add new Event</button></a>
-            </div>
-        </div>
-
-        <hr>
-
         <div class="clearfix"></div>
         <table class="table table-striped datatable" id="datatable">
             <thead>
@@ -23,10 +13,16 @@
                     <th>
                         active
                     </th>
-                    <th class="col-md-7">
+                    <th class="col-md-5 col-sm-5">
                         event name
                     </th>
-                    <th class="col-md-2" style="min-width: 90px;"></th>
+                    <th class="col-md-2 col-sm-2">
+                        start date
+                    </th>
+                    <th class="col-md-2 col-sm-2">
+                        end date
+                    </th>
+                    <th class="col-md-2 col-sm-2"></th>
                 </tr>
             </thead>
             <tbody>
@@ -73,14 +69,17 @@
             "columns": [ 
                         {"sortable": true},
                         {"sortable": true},
+                        {"sortable": true},
+                        {"sortable": true},
                         {"sortable": false}
                     ],
             ajax: {
-                    url: "/admin/event/Datatable_Events",
+                    url: "/admin/dateplanning/Datatable_Plannings",
                     type: "POST",
-                    data: function ( d ) {
-                            d.active_filter = getFilters();
-                    }
+                    data: {
+                        event_id: <?php echo $event_id; ?>
+                    },
+                    dataType: 'JSON'
                 }
             
         });				

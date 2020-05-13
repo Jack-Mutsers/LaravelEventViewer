@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\EventModel;
 use App\Models\DatePlanningModel;
 use App\Models\ReviewModel;
+use App\ApiConnector\ArtistApiHandler;
 use App\ApiConnector\EventApiHandler;
+use App\ApiConnector\EventDateApiHandler;
 use App\ApiConnector\ReviewApiHandler;
+use App\ApiConnector\StageApiHandler;
+use App\ApiConnector\GenreApiHandler;
 
 class EventController extends Controller
 {
@@ -25,10 +29,17 @@ class EventController extends Controller
 
     public function Event($id)
     {
+        $artistApiHandler = new ArtistApiHandler();
         $eventApiHandler = new EventApiHandler();
+        $eventDateApiHandler = new EventDateApiHandler();
+        $genreApiHandler = new GenreApiHandler();
 
-        $data = $eventApiHandler->GetEvent($id);
-        
+        $data = $eventApiHandler->GetEventWithDetails($id);
+        $data->genre = $genreApiHandler->GetByEventWithDetails($data->id);
+        $data->next = $eventDateApiHandler->GetNextEventDate($data->id);
+        $data->next->event_date->artists = $artistApiHandler->GetArtistsByEventDate($data->next->event_date->id);
+        $data->finished = $eventDateApiHandler->GetFinishedEvents($data->id);
+
         $EventModel = new EventModel();
         $EventModel->FillWithData($data);
 
@@ -39,9 +50,13 @@ class EventController extends Controller
 
     public function EventDate($id)
     {
-        $eventApiHandler = new EventApiHandler();
+        $eventDateApiHandler = new EventDateApiHandler();
+        $stageApiHandler = new StageApiHandler();
+        $genreApiHandler = new GenreApiHandler();
 
-        $data = $eventApiHandler->GetDatePlanning($id);
+        $data = $eventDateApiHandler->GetDatePlanning($id);
+        $data->event_date->stages = $stageApiHandler->GetByEventDate($data->event_date->id);
+        $data->event->genre = $genreApiHandler->GetByEvent($data->eventid);
 
         $datePlanningModel = new DatePlanningModel();
         $datePlanningModel->FillWithData($data);

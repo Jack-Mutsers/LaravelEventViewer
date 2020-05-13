@@ -33,12 +33,10 @@ class LoginApiHandler
         return json_decode($response);;
     }
     
-    public function Registration($userModel)
+    public function AddUser($userModel)
     {
         $curl = curl_init();
     
-        $test = json_encode($userModel);
-
         curl_setopt_array($curl, array(
             CURLOPT_URL => "http://localhost:5000/api/user/Register",
             CURLOPT_RETURNTRANSFER => true,

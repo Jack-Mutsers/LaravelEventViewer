@@ -16,7 +16,9 @@
         <div class="masonry">
             @foreach($images as $image)
                 <div class="masonry-item">
-                    <a data-fancybox="gallery" href="{{$image}}"><img class="masonry-content" src="{{$image}}"></a>
+                    <?php $value = is_object($image) ? asset($image->url): $image; ?>
+
+                    <a data-fancybox="gallery" href="{{ $value }}"><img class="masonry-content" src="{{ $value }}"></a>
                 </div>
             @endforeach
         </div>

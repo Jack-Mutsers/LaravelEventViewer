@@ -14,7 +14,8 @@
     <div class="row" id="content-header">
         <div class="col-md-5" id="poster-container">
             <!-- poster -->
-            <img src="{{$datePlanning->event_date->poster}}" alt="">
+            <?php $value = isset($datePlanning->event_date->poster) && !empty($datePlanning->event_date->poster) ? json_decode($datePlanning->event_date->poster)->url : ""; ?>
+            <img src="{{ asset($value) }}" alt="">
         </div>
         
         <div class="col-md-1 col-sm-hidden"></div>

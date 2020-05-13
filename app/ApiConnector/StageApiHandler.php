@@ -4,15 +4,14 @@ namespace App\ApiConnector;
 
 use Illuminate\Http\Request;
 
-class ArtistApiHandler
+class StageApiHandler
 {
-
-    public function GetArtistsByEventDate($event_date_id)
+    public function GetByEventDate($event_date_id)
     {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://localhost:5000/api/artist/GetArtistsByEventDate/" . $event_date_id,
+        CURLOPT_URL => "http://localhost:5000/api/stage/GetStageByEventDate/" . $event_date_id,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -27,7 +26,5 @@ class ArtistApiHandler
         curl_close($curl);
         
         return json_decode($response);
-        
     }
-
 }

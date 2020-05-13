@@ -4,6 +4,8 @@
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
 
 <div class="content-container">
+@if(!empty($DatePlanning))
+
     <div class="row">
         <h2> Upcomming event </h2>
     </div>
@@ -11,7 +13,8 @@
     <div class="row">
         <div class="col-md-5" id="content-header">
             <div id="poster-container">
-                <a href="/Event/{{$DatePlanning->eventid}}"><img src="{{$DatePlanning->event_date->poster}}" alt=""></a>
+                <?php $value = isset($DatePlanning->event_date->poster) && !empty($DatePlanning->event_date->poster) ? json_decode($DatePlanning->event_date->poster)->url : ""; ?>
+                <a href="/Event/{{$DatePlanning->eventid}}"><img src="{{ asset($value) }}" alt=""></a>
             </div>    
         </div>
         <div class="col-md-1"></div>
@@ -51,6 +54,10 @@
     </div>
 
     @include('tools.interactiveCalander')
+@else
 
+    <h1>No dates have been found</h1>
+
+@endif
 </div>
 @endsection

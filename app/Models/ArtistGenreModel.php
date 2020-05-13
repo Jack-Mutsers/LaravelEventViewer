@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-class ArtistModel
+class ArtistGenreModel
 {
-    public $id;
-    public $name;
+    public $artist_id;
+    public $genre_id;
     public $genre;
 
     public function FillWithData($data = false)
@@ -13,16 +13,16 @@ class ArtistModel
         if(!$data){
             return;
         }
-
+        
         foreach($data as $key => $val){
             if(key_exists($key, $this)){
                 if($key == "genre" && $val != null){
-                    $artistGenreModel = new ArtistGenreModel();
-                    $this->$key = $artistGenreModel->FillWithDataArray($val);
+                    $genreModel = new GenreModel();
+                    $this->$key = $genreModel->FillWithData($val);
                 }
                 else{
                     $this->$key = $val;
-                }
+                }    
             }
         }
 
@@ -44,5 +44,4 @@ class ArtistModel
 
         return $array;
     }
-
 }

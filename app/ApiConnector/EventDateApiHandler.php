@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\EventModel;
 use App\Models\GenreModel;
 
-class GenreApiHandler
+class EventDateApiHandler
 {
-    public function GetAllGenres()
+    public function GetNextEventDate($event_id)
     {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "http://localhost:5000/api/genre",
+            CURLOPT_URL => "http://localhost:5000/api/dateplanning/GetUpcommingEventDate/" . $event_id,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -26,16 +26,60 @@ class GenreApiHandler
         $response = curl_exec($curl);
 
         curl_close($curl);
-
-        return json_decode($response);;
+        
+        return json_decode($response);
     }
 
-    public function GetGenre($id)
+    public function GetFinishedEvents($event_id)
     {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://localhost:5000/api/genre/" . $id,
+            CURLOPT_URL => "http://localhost:5000/api/dateplanning/GetFinishedEventDates/" . $event_id,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        
+        return json_decode($response);
+    }
+
+    public function GetEventDates($event_id)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://localhost:5000/api/dateplanning/GetByEvent/" . $event_id,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        
+        return json_decode($response);
+    }
+
+    public function GetDatePlanning($planning_id)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "http://localhost:5000/api/dateplanning/GetByIdWithDetails/" . $planning_id,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -52,13 +96,35 @@ class GenreApiHandler
         return json_decode($response);
         
     }
-
-    public function GetByArtist($artist_id)
-    {
+    
+    public function GetAllDatePlannings()
+    { 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://localhost:5000/api/genre/GetByArtist/" . $artist_id,
+        CURLOPT_URL => "http://localhost:5000/api/dateplanning/GetAllDates",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        
+        return json_decode($response);
+    }
+    
+    public function GetNextEvent()
+    { 
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "http://localhost:5000/api/dateplanning/GetNextEvent",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -75,47 +141,4 @@ class GenreApiHandler
         return json_decode($response);
     }
 
-    public function GetByEvent($event_id)
-    {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://localhost:5000/api/genre/GetByEvent/" . $event_id,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        
-        return json_decode($response);
-    }
-
-    public function GetByEventWithDetails($event_id)
-    {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://localhost:5000/api/genre/GetByEventWithDetails/" . $event_id,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        
-        return json_decode($response);
-    }
 }

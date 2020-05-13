@@ -51,7 +51,7 @@ class LoginController extends Controller
         return view("registration", ["genres" => $genres]);
     }
 
-    public function AddUser(Request $request)
+    public function Register(Request $request)
     {
         $preferenceModel = new PreferenceModel();
         
@@ -63,7 +63,7 @@ class LoginController extends Controller
         $userModel->preference = $preferenceModel->FillWithDataArray(json_decode($request->preference));
 
         $loginHandler = new LoginApiHandler();
-        $result = $loginHandler->Registration($userModel);
+        $result = $loginHandler->AddUser($userModel);
 
         return $this->HandleLogin($result);
         //dd($result);

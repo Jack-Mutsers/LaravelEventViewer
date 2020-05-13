@@ -30,10 +30,23 @@ Route::post('NewRegister', 'LoginController@AddUser');
 Route::post('CheckLogin', 'LoginController@CheckLogin');
 Route::get('logout', 'LoginController@Logout');
 
+Route::get('upload/{filename}', 'ImageController@displayImage')->name('image.displayImage');
 
 Route::get('admin', function(){
     return redirect("/admin/events");
 });
 
+// admin event
 Route::get('admin/events', 'Admin\EventController@index');
-Route::post('admin/event/datatable_ajax', 'Admin\EventController@datatable_ajax');
+Route::get('admin/event/', 'Admin\EventController@Event');
+Route::post('admin/createEvent', 'Admin\EventController@SaveEvent');
+Route::get('admin/event/{id}', 'Admin\EventController@Event');
+Route::get('admin/event/delete/{id}', 'Admin\EventController@DeleteEvent');
+Route::post('admin/event/Datatable_Events', 'Admin\EventController@Datatable_Events');
+
+
+// admin eventdate
+Route::get('admin/eventdates/{name}/{id}', 'Admin\EventController@EventDateItems');
+Route::get('admin/eventdate/{id}', 'Admin\EventController@EventDate');
+Route::get('admin/eventdate/delete/{id}', 'Admin\EventController@DeleteEventDate');
+Route::post('admin/dateplanning/Datatable_Plannings', 'Admin\EventController@Datatable_Plannings');

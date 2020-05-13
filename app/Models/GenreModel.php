@@ -13,8 +13,6 @@ class GenreModel
             return;
         }
         
-        $data = isset($data->genre) ? $data->genre : $data;
-
         foreach($data as $key => $val){
             if(key_exists($key, $this)){
                 $this->$key = $val;
