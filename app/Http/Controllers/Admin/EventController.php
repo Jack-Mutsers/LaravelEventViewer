@@ -86,10 +86,20 @@ class EventController extends Controller
 		$eventModel->genre = $this->BuildEventGenre( json_decode($request->genre) );
 		
 		$eventApiHandler = new EventApiHandler();
-		$success = $eventApiHandler->StoreNewEvent($eventModel);
+
+		$message = "";
+		if(isset($request->id) && !empty($request->id)){
+			$eventModel->id = (int)$request->id;
+			$success = $eventApiHandler->UpdateEvent($eventModel);
+			$message = "The Event has been updated successfuly";
+		}
+		else{
+			$success = $eventApiHandler->StoreNewEvent($eventModel);
+			$message = "The Event has been added successfuly";
+		}
 
 		if(is_bool($success) && $success === true){
-			return redirect("/admin/events")->with(["success" => "The Event has been added successfuly"]);
+			return redirect("/admin/events")->with(["success" => $message]);
 		}
 
 		$error = $success;

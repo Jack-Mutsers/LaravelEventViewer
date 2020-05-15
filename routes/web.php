@@ -26,7 +26,7 @@ Route::get('Artist/{id}', 'ArtistController@Artist');
 
 Route::get('Login', 'LoginController@index');
 Route::get('Register', 'LoginController@Registration');
-Route::post('NewRegister', 'LoginController@AddUser');
+Route::post('NewRegister', 'LoginController@Register');
 Route::post('CheckLogin', 'LoginController@CheckLogin');
 Route::get('logout', 'LoginController@Logout');
 
@@ -39,7 +39,7 @@ Route::get('admin', function(){
 // admin event
 Route::get('admin/events', 'Admin\EventController@index');
 Route::get('admin/event/', 'Admin\EventController@Event');
-Route::post('admin/createEvent', 'Admin\EventController@SaveEvent');
+Route::post('admin/event/SaveEvent', 'Admin\EventController@SaveEvent');
 Route::get('admin/event/{id}', 'Admin\EventController@Event');
 Route::get('admin/event/delete/{id}', 'Admin\EventController@DeleteEvent');
 Route::post('admin/event/Datatable_Events', 'Admin\EventController@Datatable_Events');

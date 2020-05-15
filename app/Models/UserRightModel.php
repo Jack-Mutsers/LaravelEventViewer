@@ -4,6 +4,9 @@ namespace App\Models;
 
 class UserRightModel
 {
+    CONST admin = 1;
+    CONST visitor = 2;
+
     public $id;
     public $title;
     public $admin;

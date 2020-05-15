@@ -7,8 +7,10 @@
 
 <link href="{{ asset('css/admin/event.css') }}" rel="stylesheet">
 <script src="{{ asset('js/admin/event.js') }}"></script>
-<?php $input = $event; ?>
-<?php //$input = Session::has('input') && !isset($event) ? Session::get('input') : null; ?>
+<?php 
+    $input = isset($event) ? $event : null;
+    $input = Session::has('input') ? Session::get('input') : $input;
+?>
     <div class="container">
         <h1>{{$name}}</h1>
         
@@ -22,8 +24,13 @@
 
         <hr>
 
-        <form action="createEvent" id="createEvent" method="post" enctype="multipart/form-data">
+        <form action="/admin/event/SaveEvent" id="SaveEvent" method="post" enctype="multipart/form-data">
             @CSRF
+
+            @if(isset($event->id) && !empty($event->id))
+                <input type="hidden" name="id" value="{{ $event->id }}">
+            @endif
+
             <!-- Nav pills -->
             <ul class="nav nav-pills" role="tablist">
                 <li class="nav-item">
@@ -43,11 +50,7 @@
                     <div class="row form-group">
                         <div class="col-md-2"><label for="username">Active:</label></div>
                         <div class="col-md-10">
-                            <?php 
-                                $value = isset($input->active) ? $input->active : true;
-                                $test = 1;
-                                //var_dump($input);
-                            ?>
+                            <?php $value = isset($input->active) ? $input->active : true; ?>
                             <input type="checkbox" class="" name="active" id="active" <?php echo $value ? "checked" : ""; ?>>
                         </div>
                     </div>
@@ -55,9 +58,7 @@
                     <div class="row form-group">
                         <div class="col-md-2"><label for="username">Name:</label></div>
                         <div class="col-md-10">
-                            <?php 
-                                $value = isset($input->name) ? $input->name : "";
-                            ?>
+                            <?php $value = isset($input->name) ? $input->name : ""; ?>
                             <input type="text" class="form-control" name="name" id="name" value="{{$value}}">
                         </div>
                     </div>
@@ -65,9 +66,7 @@
                     <div class="row form-group">
                         <div class="col-md-2"><label for="username">Description:</label></div>
                         <div class="col-md-10">
-                            <?php 
-                                $value = isset($input->description) ? $input->description : "";
-                            ?>
+                            <?php $value = isset($input->description) ? $input->description : ""; ?>
                             <textarea name="description" class="form-control" id="description">{{$value}}</textarea>
                         </div>
                     </div>
@@ -101,7 +100,7 @@
                         </div>
                         <div class="row img_container">
                             <div class="img_holder">
-                                <img id="imgPlaceholder" src="<?php echo empty($value) ? "" : route('image.displayImage',$value); ?>" alt="">
+                                <img id="imgPlaceholder" src="{{ asset("/images/" . $value) }}" alt="">
                             </div>
                         </div>
                     </div>

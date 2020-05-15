@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\UserModel;
 use App\Models\PreferenceModel;
 use App\Models\GenreModel;
+use App\Models\UserRightModel;
 use App\ApiConnector\LoginApiHandler;
 use App\ApiConnector\GenreApiHandler;
 
@@ -59,7 +60,7 @@ class LoginController extends Controller
         $userModel->name = $request->name;
         $userModel->username = $request->username;
         $userModel->password = $request->password;
-        $userModel->right_id = 2;
+        $userModel->right_id = UserRightModel::visitor;
         $userModel->preference = $preferenceModel->FillWithDataArray(json_decode($request->preference));
 
         $loginHandler = new LoginApiHandler();
