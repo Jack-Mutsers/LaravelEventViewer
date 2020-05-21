@@ -18,8 +18,8 @@ Route::get('Home', 'HomeController@index');
 
 Route::get('Events', 'EventController@index');
 Route::get('Event/{id}', 'EventController@Event');
-Route::get('Event/EventDate/{id}', 'EventController@EventDate');
-Route::post('/Event/EventDate/AddReview', 'EventController@AddReview');
+Route::get('Event/EventDate/{id}', 'EventDateController@EventDate');
+Route::post('/Event/EventDate/AddReview', 'EventDateController@AddReview');
 
 Route::get('Artists', 'ArtistController@index');
 Route::get('Artist/{id}', 'ArtistController@Artist');
@@ -46,7 +46,7 @@ Route::post('admin/event/Datatable_Events', 'Admin\EventController@Datatable_Eve
 
 
 // admin eventdate
-Route::get('admin/eventdates/{name}/{id}', 'Admin\EventController@EventDateItems');
-Route::get('admin/eventdate/{id}', 'Admin\EventController@EventDate');
-Route::get('admin/eventdate/delete/{id}', 'Admin\EventController@DeleteEventDate');
-Route::post('admin/dateplanning/Datatable_Plannings', 'Admin\EventController@Datatable_Plannings');
+Route::get('admin/eventdates/{name}/{id}', 'Admin\EventDateController@Index');
+Route::get('admin/eventdate/{id}', 'Admin\EventDateController@EventDate');
+Route::get('admin/eventdate/delete/{id}', 'Admin\EventDateController@DeleteEventDate');
+Route::post('admin/dateplanning/Datatable_Plannings', 'Admin\EventDateController@Datatable_Plannings');

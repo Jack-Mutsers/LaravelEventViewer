@@ -5,6 +5,7 @@ namespace App\ApiConnector;
 use Illuminate\Http\Request;
 use App\Models\EventModel;
 use App\Models\GenreModel;
+use Helper;
 
 class EventApiHandler
 {
@@ -101,7 +102,7 @@ class EventApiHandler
 
         curl_close($curl);
         
-        $json = $this->isJson($response);
+        $json = Helper::isJson($response);
 
         return $json ? json_decode($response) : $response;
     }
@@ -125,7 +126,7 @@ class EventApiHandler
 
         curl_close($curl);
         
-        $json = $this->isJson($response);
+        $json = Helper::isJson($response);
 
         return $json ? json_decode($response) : $response;
     }
@@ -153,15 +154,12 @@ class EventApiHandler
 
         curl_close($curl);
         
-        $json = $this->isJson($response);
+        $json = Helper::isJson($response);
 
         return $json ? json_decode($response) : $response;
     }
 
-    function isJson($string) {
-        json_decode($string);
-        return (json_last_error() == JSON_ERROR_NONE);
-    }
+    
    
    
 }

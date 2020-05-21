@@ -70,7 +70,7 @@ class LoginController extends Controller
         //dd($result);
     }
 
-    public function HandleLogin($data)
+    private function HandleLogin($data)
     {
         $userModel = new UserModel();
         $userModel->FillWithData($data);

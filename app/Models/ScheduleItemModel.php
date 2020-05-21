@@ -9,7 +9,7 @@ class ScheduleItemModel
     public $artist_id;
     public $start;
     public $stage_time;
-    public $artists;
+    public $artist;
 
     public function FillWithData($data = false)
     {

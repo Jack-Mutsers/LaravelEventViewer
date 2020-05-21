@@ -10,6 +10,7 @@ class ReviewModel
     public $review;
     public $rating;
     public $validated;
+    public $user;
 
     public function FillWithData($data = false)
     {
@@ -18,7 +19,15 @@ class ReviewModel
         }
 
         foreach($data as $key => $val){
-            $this->$key = $val;
+            if(key_exists($key, $this)){
+                if($key == "user" && $val != null){
+                    $userModel = new UserModel();
+                    $this->$key = $userModel->FillWithData($val);
+                }
+                else{
+                    $this->$key = $val;
+                }
+            }
         }
 
         return $this;

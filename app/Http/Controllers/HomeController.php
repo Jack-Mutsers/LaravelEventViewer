@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ApiConnector\EventApiHandler;
-use App\ApiConnector\EventDateApiHandler;
+use App\ApiConnector\DatePlanningApiHandler;
 use App\Models\DatePlanningModel;
 
 class HomeController extends Controller
 {
     public function index(){
-        $eventDateHandler = new EventDateApiHandler();
-        $plannigData = $eventDateHandler->GetAllDatePlannings();
-        $nextEventData = $eventDateHandler->GetNextEvent();
+        $eventDateHandler = new DatePlanningApiHandler();
+        $plannigData = $eventDateHandler->GetAllDatePlannings(); // get all dates for the planner
+        $nextEventData = $eventDateHandler->GetNextEvent(); // get upcomming event
 
         $datePlanningModel = new DatePlanningModel();
         $dates = $datePlanningModel->FillWithDataArray($plannigData);

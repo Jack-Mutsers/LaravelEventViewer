@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\EventModel;
 use App\Models\GenreModel;
 
-class EventDateApiHandler
+class DatePlanningApiHandler
 {
     public function GetNextEventDate($event_id)
     {
@@ -74,7 +74,7 @@ class EventDateApiHandler
         return json_decode($response);
     }
 
-    public function GetDatePlanning($planning_id)
+    public function GetDatePlanningWithDetails($planning_id)
     {
         $curl = curl_init();
 
