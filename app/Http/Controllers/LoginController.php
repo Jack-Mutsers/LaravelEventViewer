@@ -66,8 +66,14 @@ class LoginController extends Controller
         $loginHandler = new LoginApiHandler();
         $result = $loginHandler->AddUser($userModel);
 
-        return $this->HandleLogin($result);
-        //dd($result);
+        $message = "Something went wrong with the registration proces";
+        if(isset($result->name) && $result->name == $userModel->name){
+            return $this->HandleLogin($result);
+        }else if(isset($result->detail)){
+            $message = $result->detail;
+        }
+        
+        return back()->with(["input" => $userModel])->with('error', $message);
     }
 
     private function HandleLogin($data)

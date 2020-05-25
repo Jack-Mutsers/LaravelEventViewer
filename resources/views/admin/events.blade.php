@@ -16,6 +16,7 @@
 
         <hr>
 
+        @include('tools.flash-message')
         <div class="clearfix"></div>
         <table class="table table-striped datatable" id="datatable">
             <thead>

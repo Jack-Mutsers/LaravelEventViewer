@@ -12,6 +12,7 @@
     $input = Session::has('input') ? Session::get('input') : $input;
 ?>
     <div class="container">
+        @include('tools.flash-message')
         <h1>{{$name}}</h1>
         
         <hr>
