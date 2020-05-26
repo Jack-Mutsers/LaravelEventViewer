@@ -18,6 +18,11 @@ Route::get('Home', 'HomeController@index');
 
 Route::get('Events', 'EventController@index');
 Route::get('Event/{id}', 'EventController@Event');
+Route::get('/Events/reset', 'EventController@GetAllActiveEvents');
+Route::post('/Events/sorting', 'EventController@OrderEvents');
+Route::post('/Events/filter', 'EventController@GetEventsByGenre');
+Route::post('/Events/search', 'EventController@GetEventByName');
+
 Route::get('Event/EventDate/{id}', 'EventDateController@EventDate');
 Route::post('/Event/EventDate/AddReview', 'EventDateController@AddReview');
 

@@ -38,3 +38,21 @@
     background: white;
     color: black;
 }
+
+.filterField{
+    padding: 0 8px;
+    margin: 0 15px;
+    float: left;
+}
+
+.select_container{
+    float: left;
+    width: 130px;
+    margin: 0 10px;
+}
+
+.button_container{
+    float: left;
+    width: 100px;
+    margin: 0 10px;
+}

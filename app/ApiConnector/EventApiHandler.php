@@ -31,6 +31,28 @@ class EventApiHandler
         return json_decode($response);;
     }
 
+    public function GetAllActiveEvents()
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://localhost:5000/api/event/GetAllActiveEvents",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        return json_decode($response);;
+    }
+
     public function GetEventWithDetails($id)
     {
         $curl = curl_init();
@@ -158,8 +180,82 @@ class EventApiHandler
 
         return $json ? json_decode($response) : $response;
     }
-
     
+   public function EventOrderRequest ($fieldName, $direction, $genre_id)
+   {
+       $OrderRequest = array(
+           "fieldName" => $fieldName,
+           "Ascending" => (bool) $direction,
+           "GenreId" => $genre_id
+       );
+
+       $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://localhost:5000/api/event/SortEventData",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($OrderRequest),
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        
+        $json = Helper::isJson($response);
+
+        return $json ? json_decode($response) : $response;
+   }
    
-   
+   public function GetEventsByGenre($genre_id)
+   {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://localhost:5000/api/event/GetAllByGenre/" . $genre_id,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        
+        return json_decode($response);
+   }
+
+   public function GetEventByName($name)
+   {
+       $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://localhost:5000/api/event/GetbyName/" . $name,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        
+        return json_decode($response);
+   }
 }
